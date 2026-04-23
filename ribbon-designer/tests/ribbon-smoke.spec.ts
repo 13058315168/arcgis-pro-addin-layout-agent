@@ -33,6 +33,18 @@ test('Ribbon 设计器主流程', async ({ page }) => {
   await expect(addedButton).toHaveCSS('width', '64px');
   await expect(addedButton).toHaveCSS('height', '96px');
 
+  await page
+    .getByTestId('next-palette-button-small')
+    .dragTo(firstDrop, { targetPosition: { x: 92, y: 40 } });
+
+  const hasSmallButton = await page.locator('[data-testid^="next-control-button_"]').evaluateAll((nodes) =>
+    nodes.some((node) => {
+      const style = window.getComputedStyle(node);
+      return style.width === '32px' && style.height === '32px';
+    }),
+  );
+  expect(hasSmallButton).toBe(true);
+
   await addedButton.click();
   await page.getByLabel('标题').fill('批量导出');
   await expect(page.locator('.next-json')).toContainText('"caption": "批量导出"');

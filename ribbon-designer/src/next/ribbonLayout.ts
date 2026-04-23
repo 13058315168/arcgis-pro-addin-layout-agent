@@ -1,4 +1,3 @@
-import { resolveRenderedSize } from '../ribbon';
 import type {
   ControlType,
   RibbonControl,
@@ -46,9 +45,9 @@ export const footprintLabel = (type: ControlType, size: RibbonControlSize) => {
 
 export const getRenderedSize = (
   control: RibbonControl,
-  subgroup: RibbonSubgroup,
-  previewMode: RibbonPreviewMode,
-) => resolveRenderedSize(subgroup.sizeMode, previewMode, control.supportedSizes, control.size);
+  _subgroup: RibbonSubgroup,
+  _previewMode: RibbonPreviewMode,
+) => control.size;
 
 export const getRenderedFootprint = (
   control: RibbonControl,

@@ -682,26 +682,20 @@ function Palette({
           <h3>{section.title}</h3>
           {section.items.map((item) => (
             <div className="next-library-row" key={item.type}>
-              <div>
+              <div className="library-row-text">
                 <strong>{item.label}</strong>
                 <span>{item.shortDescription}</span>
               </div>
               <div className="next-library-sizes">
                 {item.supportedSizes.map((size) => (
-                  <button
+                  <PalettePreview
                     key={`${item.type}-${size}`}
-                    draggable
-                    data-testid={`next-palette-${item.type}-${size}`}
-                    className={activeLibraryItem?.item.type === item.type && activeLibraryItem.size === size ? 'active' : ''}
-                    onDragStart={(event) => {
-                      event.dataTransfer.setData('text/plain', `${item.type}:${size}`);
-                      onPick({ item, size });
-                    }}
-                    onClick={() => onPick({ item, size })}
+                    item={item}
+                    size={size}
+                    active={activeLibraryItem?.item.type === item.type && activeLibraryItem.size === size}
+                    onPick={onPick}
                     onDragEnd={onDragEnd}
-                  >
-                    {SIZE_LABELS[size]} {footprintLabel(item.type, size)}
-                  </button>
+                  />
                 ))}
               </div>
             </div>
@@ -709,6 +703,48 @@ function Palette({
         </div>
       ))}
     </section>
+  );
+}
+
+function PalettePreview({
+  item,
+  size,
+  active,
+  onPick,
+  onDragEnd,
+}: {
+  item: LibraryControlDefinition;
+  size: RibbonControlSize;
+  active: boolean;
+  onPick: (value: { item: LibraryControlDefinition; size: RibbonControlSize }) => void;
+  onDragEnd: () => void;
+}) {
+  const footprint = getFootprint(item.type, size);
+
+  return (
+    <div className="library-preview-item">
+      <button
+        draggable
+        data-testid={`next-palette-${item.type}-${size}`}
+        className={`library-ribbon-preview ${active ? 'active' : ''} size-${size} type-${item.type}`}
+        style={{
+          '--preview-cols': footprint.w,
+          '--preview-rows': footprint.h,
+        } as CSSProperties}
+        title={`${item.label} / ${SIZE_LABELS[size]} / ${footprintLabel(item.type, size)}`}
+        onDragStart={(event) => {
+          event.dataTransfer.setData('text/plain', `${item.type}:${size}`);
+          onPick({ item, size });
+        }}
+        onClick={() => onPick({ item, size })}
+        onDragEnd={onDragEnd}
+      >
+        <ControlMock type={item.type} caption={item.label} size={size} mode="library" />
+      </button>
+      <span className="library-size-caption">
+        {SIZE_LABELS[size]} · {footprintLabel(item.type, size)}
+      </span>
+    </div>
   );
 }
 
