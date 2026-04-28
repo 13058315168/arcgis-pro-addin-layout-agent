@@ -13,11 +13,11 @@ using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("GisProRibbonLayoutValidator.AddIn")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
-[assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+feb360248a3b826398f846a25610330a72f3b665")]
+[assembly: System.Reflection.AssemblyFileVersionAttribute("1.118.1001.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.118.1001+328f0195f9bcf4e076a1324808d649ddb2125bac")]
 [assembly: System.Reflection.AssemblyProductAttribute("GisProRibbonLayoutValidator.AddIn")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GisProRibbonLayoutValidator.AddIn")]
-[assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
+[assembly: System.Reflection.AssemblyVersionAttribute("1.118.1001.0")]
 [assembly: System.Runtime.Versioning.TargetPlatformAttribute("Windows7.0")]
 [assembly: System.Runtime.Versioning.SupportedOSPlatformAttribute("Windows7.0")]
 
